@@ -8,7 +8,6 @@ dataSources:
     name: LUBE
     network: linea
     source:
-      address: "0x1bE3735Dd0C0Eb229fB11094B6c277192349EBbf"
       abi: LUBE
       startBlock: 873382
     mapping:
@@ -16,17 +15,13 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - OwnershipTransferred
-        - Transfer
+        - Token
+        - Account
+        - TokenBalance
       abis:
         - name: LUBE
           file: ./abis/LUBE.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
       file: ./src/lube.ts
