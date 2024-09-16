@@ -9,7 +9,6 @@ dataSources:
     network: linea
     source:
       abi: LUBE
-      startBlock: 873382
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -17,7 +16,7 @@ dataSources:
       entities:
         - Token
         - Account
-        - TokenBalance
+        - TokenHolder
       abis:
         - name: LUBE
           file: ./abis/LUBE.json

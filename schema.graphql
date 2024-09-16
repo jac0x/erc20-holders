@@ -1,32 +1,3 @@
-type Approval @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  value: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type OwnershipTransferred @entity(immutable: true) {
-  id: Bytes!
-  previousOwner: Bytes! # address
-  newOwner: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Transfer @entity(immutable: true) {
-  id: Bytes!
-  from: Bytes! # address
-  to: Bytes! # address
-  value: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
 
 # Token details
 type Token @entity {
@@ -37,22 +8,21 @@ type Token @entity {
   symbol: String!
   #decimals used
   decimals: BigDecimal!
+  holders: [TokenHolder!]! @derivedFrom(field: "token")
 }
 
 # account details
 type Account @entity {
   #account address
   id: ID!
-  #balances
-  balances: [TokenBalance!]! @derivedFrom(field: "account")
+  #tokens
+  tokens: [TokenHolder!]! @derivedFrom(field: "account")
 }
 # token balance details
-type TokenBalance @entity {
+type TokenHolder @entity {
   id: ID!
   #token
   token: Token!
   #account
   account: Account!
-  #amount
-  amount: BigDecimal!
 }
